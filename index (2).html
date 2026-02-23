@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>xBuyer - Página Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        nav {
+            background-color: #e60000;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            background-color: white;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .quiz button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e60000;
+            color: white;
+            cursor: pointer;
+        }
+
+        .quiz button:hover {
+            background-color: #b80000;
+        }
+
+        footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>xBuyer</h1>
+    <p>Canal de YouTube de FIFA y entretenimiento</p>
+</header>
+
+<nav>
+    <a href="#info">Información</a>
+    <a href="#imagenes">Imágenes</a>
+    <a href="#juego">Mini juego</a>
+</nav>
+
+<section id="info">
+    <h2>¿Quiénes son xBuyer?</h2>
+    <p>
+         es un canal de YouTube español
+        creado por los hermanos Javi y Eric Buyer.
+        Su contenido se centra principalmente en el videojuego FIFA,
+        donde realizan retos, partidos y vídeos de entretenimiento.
+        Es uno de los canales de FIFA más conocidos en España.
+    </p>
+</section>
+
+<section id="imagenes">
+    <h2>Imágenes reales</h2>
+
+    <!-- Imagen real JPEG (salen ellos) -->
+    <img src="https://img.youtube.com/vi/OLG_mMDK6dU/maxresdefault.jpg"
+         alt="Javi y Eric Buyer en un vídeo">
+
+    <img src="https://img.youtube.com/vi/JZfueS_tVB4/maxresdefault.jpg"
+         alt="xBuyer jugando FIFA">
+
+    <img src="https://img.youtube.com/vi/rjBQMGDanKY/maxresdefault.jpg"
+         alt="xBuyer reto FIFA">
+</section>
+
+<section id="juego">
+    <h2>🎮 Mini juego: Quiz de xBuyer</h2>
+
+    <p id="pregunta"></p>
+
+    <div class="quiz">
+        <button id="a" onclick="responder(0)"></button>
+        <button id="b" onclick="responder(1)"></button>
+        <button id="c" onclick="responder(2)"></button>
+    </div>
+
+    <p id="mensaje" style="font-weight:bold;"></p>
+</section>
+
+<footer>
+    <p>© 2026 Página fan de xBuyer</p>
+</footer>
+
+<script>
+    const quiz = [
+        {
+            p: "¿Cuántas personas forman xBuyer?",
+            r: ["Una", "Dos", "Tres"],
+            c: 1
+        },
+        {
+            p: "¿Qué videojuego aparece en la mayoría de sus vídeos?",
+            r: ["Fortnite", "Minecraft", "FIFA"],
+            c: 2
+        },
+        {
+            p: "¿xBuyer es un canal español?",
+            r: ["Sí", "No", "Es latinoamericano"],
+            c: 0
+        },
+        {
+            p: "¿Son hermanos los creadores de xBuyer?",
+            r: ["No", "Sí", "No se sabe"],
+            c: 1
+        },
+        {
+            p: "¿Qué tipo de vídeos hacen normalmente?",
+            r: ["Cocina", "Retos y partidos", "Vlogs de viajes"],
+            c: 1
+        },
+        {
+            p: "¿En qué plataforma son conocidos?",
+            r: ["TikTok", "YouTube", "Twitch"],
+            c: 1
+        },
+        {
+            p: "¿Su contenido principal es de fútbol?",
+            r: ["Sí", "No", "A veces"],
+            c: 0
+        },
+        {
+            p: "¿xBuyer es un canal individual?",
+            r: ["Sí", "No, son dos", "Es una empresa"],
+            c: 1
+        }
+    ];
+
+    let i = 0;
+    let puntos = 0;
+
+    function cargar() {
+        document.getElementById("pregunta").textContent = quiz[i].p;
+        document.getElementById("a").textContent = quiz[i].r[0];
+        document.getElementById("b").textContent = quiz[i].r[1];
+        document.getElementById("c").textContent = quiz[i].r[2];
+    }
+
+    function responder(op) {
+        if (op === quiz[i].c) {
+            puntos++;
+            document.getElementById("mensaje").textContent = "✅ Correcto";
+        } else {
+            document.getElementById("mensaje").textContent = "❌ Incorrecto";
+        }
+
+        i++;
+
+        if (i < quiz.length) {
+            setTimeout(() => {
+                document.getElementById("mensaje").textContent = "";
+                cargar();
+            }, 1000);
+        } else {
+            document.getElementById("pregunta").textContent =
+                "Juego terminado. Puntuación: " + puntos + " / " + quiz.length;
+            document.querySelector(".quiz").style.display = "none";
+        }
+    }
+
+    cargar();
+</script>
+
+</body>
+</html>
+
